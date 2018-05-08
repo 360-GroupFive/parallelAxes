@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .viz-biPartite rect {
+        shape-rendering: crispEdges;
+    }
+
+    .viz-biPartite-mainBar {
+        fill-opacity: 0;
+        stroke-width: 0.5px;
+        stroke: rgb(0, 0, 0);
+        stroke-opacity: 0;
+    }
+</style>
+
+<body>
+    <svg width="960" height="700">
+        <g transform="translate(250,50)"></g>
+    </svg>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://vizjs.org/viz.v1.3.0.min.js"></script>
+    <script>
+        var data = [{
+            group: 'A',
+            subgroup: 'X',
+            count: 70
+        }, {
+            group: 'H',
+            subgroup: 'Y',
+            count: 20
+        }, {
+            group: 'B',
+            subgroup: 'X',
+            count: 5
+        }, {
+            group: 'B',
+            subgroup: 'Y',
+            count: 8
+        }, {
+            group: 'C',
+            subgroup: 'X',
+            count: 2
+        }, {
+            group: 'D',
+            subgroup: 'Y',
+            count: 9
+        }, {
+            group: 'E',
+            subgroup: 'X',
+            count: 2
+        }, {
+            group: 'F',
+            subgroup: 'Y',
+            count: 9
+        }];
+
+        var bP = viz.biPartite()
+            .keyPrimary(d => d.group)
+            .keySecondary(d => d.subgroup)
+            .value(d => d.count)
+            .data(data)
+
+        d3.select("g").call(bP)
+
+        // adjust the bl.ocks frame dimension. Not part of example.
+        d3.select(self.frameElement).style("height", "800px");
+    </script>
